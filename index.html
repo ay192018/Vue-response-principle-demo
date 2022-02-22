@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>响应式</h1>
+    <script>
+      const data = {
+        name: "小明",
+        age: 18,
+      };
+      let _data = {}; //监听代理对象
+      const createObj = (_data, key, value) => {
+        // console.log(_data, key, value);
+        Object.defineProperty(_data, key, {
+          get() {
+            return value;
+            // console.log("取值触发");
+          },
+          set(val) {
+            value = val;
+            // console.log(value, "设置值触发了");
+          },
+        });
+      };
+
+      Object.entries(data).forEach(([key, value]) => {
+        //循环遍历对象里的键值
+        createObj(_data, key, value); //传入代理对象，原对象的键值
+      });
+
+      //vue2底层是 数据代理：通过应该对象代理另个对象的中的属性操作(读/写操作)
+    </script>
+  </body>
+</html>
